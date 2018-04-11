@@ -1,0 +1,56 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+header {
+  height: 10vh;
+  background: slategrey;
+  color: white;
+}
+
+.today {
+  flex: 1 0 auto;
+}
+
+#aside {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+}
+
+[class^="forecast"] {
+  color: white;
+  flex: 1;
+  height: 100px;
+  height: 40vh;
+}
+
+.forecast-1 {
+  background-color: #16a085;
+}
+
+.forecast-2 {
+  background-color: #27ae60;
+}
+
+.forecast-3 {
+  background-color: #2980b9;
+}
+
+.forecast-4 {
+  background-color: #8e44ad;
+}
+
+.description {
+  text-transform: capitalize;
+}
