@@ -1,38 +1,65 @@
+@import "./font-face.css";
+
+:root {
+  --font-regular: 2em;
+  --font-small: 1.6em;
+  --color-primary: #2c3e50;
+}
+
+* {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 html,
 body {
-  margin: 0;
   height: 100%;
-  font-family: "Open Sans", sans-serif;
+  font: 14px/20px "Graphik Web Light", Arial, Verdana, sans-serif;
   text-align: center;
+  color: var(--color-primary);
 }
 
 main {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  line-height: 1.4em;
 }
 
 header {
   height: 10vh;
-  background: slategrey;
+  background: var(--color-primary);
   color: white;
+  font-size: var(--font-regular);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .today {
   flex: 1 0 auto;
+  font-size: var(--font-regular);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #aside {
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
+  font-size: var(--font-small);
 }
 
 [class^="forecast"] {
   color: white;
   flex: 1;
-  height: 100px;
   height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .forecast-1 {

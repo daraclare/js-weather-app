@@ -51,6 +51,7 @@ fetch(URL).then(response => {
       //create elements
       let aside = document.getElementById("aside");
       let section = document.createElement("section");
+      let article = document.createElement("article");
       let dayDiv = `<div class="today-day">${day}</div>`;
       let temp = `<div id="today-temp">${item.main.temp}&#176;</div>`;
       let icon = `<div class="icon"><i class="wi wi-${
@@ -63,8 +64,9 @@ fetch(URL).then(response => {
         item.main.temp_max
       }&#176; | Min: ${item.main.temp_min}&#176;</div>`;
 
-      section.innerHTML = dayDiv + temp + icon + description + minMax;
+      article.innerHTML = dayDiv + temp + icon + description + minMax;
       section.setAttribute("class", `forecast-${index + 1}`);
+      section.append(article);
       aside.append(section);
     });
   });
