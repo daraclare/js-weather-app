@@ -24,9 +24,9 @@ fetch(URL).then(response => {
     let day = getDay(forecast[0].dt_txt);
     document.getElementById("today-day").innerHTML = day;
     //temp
-    document.getElementById("today-temp").innerHTML = `${
+    document.getElementById("today-temp").innerHTML = `${Math.round(
       forecast[0].main.temp
-    }&#176;`;
+    )}&#176;`;
 
     let icon = `<i class="wi wi-${forecast[0].weather[0].icon}"></i>`;
     document.getElementById("today-icon").innerHTML = icon;
@@ -34,9 +34,9 @@ fetch(URL).then(response => {
       forecast[0].weather[0].description;
     document.getElementById(
       "today-minMax"
-    ).innerHTML = `<div class="details">Max: ${
+    ).innerHTML = `<div class="details today-details">Max: ${Math.round(
       forecast[0].main.temp_max
-    }&#176; | Min: ${forecast[0].main.temp_min}&#176;</div>`;
+    )}&#176; | Min: ${Math.round(forecast[0].main.temp_min)}&#176;</div>`;
 
     // next days forecast
 
@@ -53,14 +53,14 @@ fetch(URL).then(response => {
       let section = document.createElement("section");
       let article = document.createElement("article");
       let dayDiv = `<div class="today-day">${day}</div>`;
-      let temp = `<div id="today-temp">${item.main.temp}&#176;</div>`;
+      let temp = `<div id="temp">${Math.round(item.main.temp)}&#176;</div>`;
       let icon = `<div class="icon"><i class="wi wi-${
         item.weather[0].icon
       }"></i></div>`;
       let description = `<div class="description">${
         item.weather[0].description
       }</div>`;
-      let minMax = `<div class="details">Max: ${
+      let minMax = `<div class="details forecast-details">Max: ${
         item.main.temp_max
       }&#176; | Min: ${item.main.temp_min}&#176;</div>`;
 

@@ -1,8 +1,8 @@
 @import "./font-face.css";
 
 :root {
-  --font-regular: 2em;
-  --font-small: 1.6em;
+  --font-regular: 2rem;
+  --font-small: 1.6rem;
   --color-primary: #2c3e50;
 }
 
@@ -25,17 +25,19 @@ main {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  line-height: 1.4em;
 }
 
 header {
-  height: 10vh;
+  min-height: 48px;
   background: var(--color-primary);
   color: white;
   font-size: var(--font-regular);
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .today {
@@ -44,6 +46,53 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 55vh;
+}
+
+.day {
+  font-size: 2rem;
+  font-weight: bolder;
+  padding-bottom: 2rem;
+}
+
+#today-temp {
+  font-size: 4rem;
+  font-weight: bold;
+  position: relative;
+  top: 1rem;
+  left: 11rem;
+}
+
+#temp {
+  position: relative;
+  top: 1.4rem;
+  left: 4rem;
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+#today-icon {
+  font-size: 16rem;
+  padding: 0 0 0.15em 0;
+}
+
+.details {
+  padding-top: 1rem;
+  font-size: 1.2rem;
+}
+
+.forecast-details {
+  padding-top: 0.25em;
+  font-size: 1rem;
+}
+
+.description {
+  padding-top: 1rem;
+  text-transform: capitalize;
+}
+
+.icon {
+  font-size: 4rem;
 }
 
 #aside {
@@ -56,10 +105,11 @@ header {
 [class^="forecast"] {
   color: white;
   flex: 1;
-  height: 40vh;
+  height: 30vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 25vh;
 }
 
 .forecast-1 {
@@ -78,6 +128,13 @@ header {
   background-color: #8e44ad;
 }
 
-.description {
-  text-transform: capitalize;
+@media screen and (max-width: 736px) {
+  #aside {
+    flex-direction: column;
+  }
+
+  html,
+  body {
+    font: 12px/18px "Graphik Web Light", Arial, Verdana, sans-serif;
+  }
 }
