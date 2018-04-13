@@ -4,6 +4,8 @@
   --font-regular: 2rem;
   --font-small: 1.6rem;
   --color-primary: #2c3e50;
+  --icon-size: 12rem;
+  --today-text: calc(var(--icon-size) / 4);
 }
 
 * {
@@ -15,8 +17,7 @@
 
 html,
 body {
-  height: 100%;
-  font: 14px/20px "Graphik Web Light", Arial, Verdana, sans-serif;
+  font: 14px/1.2 "Graphik Web Light", Arial, Verdana, sans-serif;
   text-align: center;
   color: var(--color-primary);
 }
@@ -42,28 +43,22 @@ header {
 
 .today {
   flex: 1 0 auto;
-  font-size: var(--font-regular);
+  font-size: var(--today-text);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 55vh;
 }
 
-.day {
-  font-size: 2rem;
-  font-weight: bolder;
-  padding-bottom: 2rem;
-}
-
-#today-temp {
+.today-temp {
   font-size: 4rem;
-  font-weight: bold;
   position: relative;
-  top: 1rem;
-  left: 11rem;
+  top: 2rem;
+  left: 10rem;
+  font-weight: bolder;
 }
 
-#temp {
+.temp {
   position: relative;
   top: 1.4rem;
   left: 4rem;
@@ -71,31 +66,30 @@ header {
   font-weight: bolder;
 }
 
-#today-icon {
-  font-size: 16rem;
-  padding: 0 0 0.15em 0;
+.today-icon {
+  font-size: var(--icon-size);
+  position: relative;
+  top: -1.5rem;
 }
 
 .details {
-  padding-top: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .forecast-details {
-  padding-top: 0.25em;
   font-size: 1rem;
 }
 
 .description {
-  padding-top: 1rem;
   text-transform: capitalize;
+  line-height: 1.4;
 }
 
 .icon {
   font-size: 4rem;
 }
 
-#aside {
+.aside {
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
@@ -129,12 +123,16 @@ header {
 }
 
 @media screen and (max-width: 736px) {
-  #aside {
+  html,
+  body {
+    font: 12px/1.2 "Graphik Web Light", Arial, Verdana, sans-serif;
+  }
+
+  .aside {
     flex-direction: column;
   }
 
-  html,
-  body {
-    font: 12px/18px "Graphik Web Light", Arial, Verdana, sans-serif;
+  .forecast-details {
+    font-size: 1.2rem;
   }
 }

@@ -19,10 +19,7 @@ fetch(URL).then(response => {
     ${res.city.name}, ${res.city.country}`;
     //day
     let forecast = res.list;
-    // let date = new Date(forecast[0].dt_txt);
-    // let day = date.toString().substring(0, 3);
-    let day = getDay(forecast[0].dt_txt);
-    document.getElementById("today-day").innerHTML = day;
+
     //temp
     document.getElementById("today-temp").innerHTML = `${Math.round(
       forecast[0].main.temp
@@ -53,7 +50,9 @@ fetch(URL).then(response => {
       let section = document.createElement("section");
       let article = document.createElement("article");
       let dayDiv = `<div class="today-day">${day}</div>`;
-      let temp = `<div id="temp">${Math.round(item.main.temp)}&#176;</div>`;
+      let temp = `<div class="temp" id="temp">${Math.round(
+        item.main.temp
+      )}&#176;</div>`;
       let icon = `<div class="icon"><i class="wi wi-${
         item.weather[0].icon
       }"></i></div>`;
