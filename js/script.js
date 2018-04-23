@@ -1,5 +1,3 @@
-// console.log("working!!!!");
-
 const APIKEY = "82f2229c255b1505c496b13203e48e52";
 const BASE = "https://api.openweathermap.org/data/2.5/forecast";
 const CITYID = "?id=2964574";
@@ -7,66 +5,103 @@ const UNITS = "&units=metric";
 const URL = `${BASE}${CITYID}${UNITS}&APPID=${APIKEY}`;
 
 function getDay(longDate) {
-  let date = new Date(longDate);
-  let day = date.toString().substring(0, 3);
+  const date = new Date(longDate);
+  const day = date.toString().substring(0, 3);
   return day;
 }
 
-fetch(URL).then(response => {
-  response.json().then(res => {
-    //header
-    document.getElementsByTagName("header")[0].innerHTML = `Weather in
-    ${res.city.name}, ${res.city.country}`;
-    //day
-    let forecast = res.list;
+document.addEventListener("DOMContentLoaded", async function() {
+  let res;
 
-    //temp
-    document.getElementById("today-temp").innerHTML = `${Math.round(
-      forecast[0].main.temp
-    )}&#176;`;
-
-    let icon = `<i class="wi wi-${forecast[0].weather[0].icon}"></i>`;
-    document.getElementById("today-icon").innerHTML = icon;
-    document.getElementById("today-description").innerHTML =
-      forecast[0].weather[0].description;
+  try {
+    const response = await fetch(URL);
+    res = await response.json();
+  } catch (err) {
     document.getElementById(
-      "today-minMax"
-    ).innerHTML = `<div class="details today-details">Max: ${Math.round(
-      forecast[0].main.temp_max
-    )}&#176; | Min: ${Math.round(forecast[0].main.temp_min)}&#176;</div>`;
+      "today-day"
+    ).textContent = `Technical error has occurred: ${err}`;
+    // eslint-disable-next-line
+    console.error(err);
+  }
 
-    // next days forecast
+  // header
+  document.getElementsByTagName("header")[0].textContent = `Weather in
+    ${res.city.name}, ${res.city.country}`;
 
-    let data = [];
-    for (let i = 8; i < forecast.length; i += 8) {
-      data.push(forecast[i]);
-    }
-    data.map((item, index) => {
-      //content for elements
-      let day = getDay(item.dt_txt);
+  const forecast = res.list;
 
-      //create elements
-      let aside = document.getElementById("aside");
-      let section = document.createElement("section");
-      let article = document.createElement("article");
-      let dayDiv = `<div class="today-day">${day}</div>`;
-      let temp = `<div class="temp" id="temp">${Math.round(
-        item.main.temp
-      )}&#176;</div>`;
-      let icon = `<div class="icon"><i class="wi wi-${
-        item.weather[0].icon
-      }"></i></div>`;
-      let description = `<div class="description">${
-        item.weather[0].description
-      }</div>`;
-      let minMax = `<div class="details forecast-details">Max: ${
-        item.main.temp_max
-      }&#176; | Min: ${item.main.temp_min}&#176;</div>`;
+  // today's temperature
+  document.getElementById("today-temp").textContent = `${Math.round(
+    forecast[0].main.temp
+  )}°`;
 
-      article.innerHTML = dayDiv + temp + icon + description + minMax;
-      section.setAttribute("class", `forecast-${index + 1}`);
-      section.append(article);
-      aside.append(section);
-    });
+  // today's weather icon
+  const todayIcon = document.getElementById("today-icon");
+  todayIcon.setAttribute("class", `wi wi-${forecast[0].weather[0].icon}`);
+
+  // today's weather description
+  document.getElementById("today-description").textContent =
+    forecast[0].weather[0].description;
+  const detailsDiv = document.createElement("div");
+  detailsDiv.setAttribute("class", "details today-details");
+
+  // today's min and max temperature
+  document.getElementById("today-minMax").textContent = `Max: ${Math.round(
+    forecast[0].main.temp_max
+  )}° | Min: ${Math.round(forecast[0].main.temp_min)}°`;
+
+  // next 4 days forecast
+  const data = [];
+
+  // get dataset per day, not every 3 hours
+  for (let i = 8; i < forecast.length; i += 8) {
+    data.push(forecast[i]);
+  }
+
+  data.forEach((item, index) => {
+    // content for elements
+    const day = getDay(item.dt_txt);
+
+    // create elements
+    const aside = document.getElementById("aside");
+    const section = document.createElement("section");
+    const article = document.createElement("article");
+
+    // forecast day
+    const dayDiv = document.createElement("div");
+    dayDiv.textContent = day;
+
+    // forecast temp
+    const temp = document.createElement("div");
+    temp.setAttribute("class", "temp");
+    temp.textContent = `${Math.round(item.main.temp)}°`;
+
+    // forecast icon
+    const icon = document.createElement("div");
+    icon.setAttribute("class", "icon");
+    const iconInsert = document.createElement("i");
+    iconInsert.setAttribute("class", `wi wi-${item.weather[0].icon}`);
+    icon.append(iconInsert);
+
+    // forecast description
+    const description = document.createElement("div");
+    description.setAttribute("class", "description");
+    description.textContent = `${item.weather[0].description}`;
+
+    // forecast minMax
+    const minMax = document.createElement("div");
+    minMax.setAttribute("class", "details forecast-details");
+    minMax.textContent = `Max: ${item.main.temp_max}° | Min: ${
+      item.main.temp_min
+    }°`;
+
+    article.append(dayDiv);
+    article.append(temp);
+    article.append(icon);
+    article.append(description);
+    article.append(minMax);
+    section.setAttribute("class", `forecast-${index + 1}`);
+    section.append(article);
+    aside.append(section);
   });
 });
