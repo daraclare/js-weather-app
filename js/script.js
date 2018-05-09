@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async function() {
   }
 
   // header
-  document.getElementsByTagName("header")[0].textContent = `Weather in
+  document.querySelector("header").textContent = `Weather in
     ${res.city.name}, ${res.city.country}`;
 
   const forecast = res.list;
